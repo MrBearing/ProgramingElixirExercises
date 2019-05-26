@@ -1,10 +1,13 @@
-IO.puts("program start")
+IO.puts "program start"
 
 list_concat = fn (a , b) -> a++b end
-list_concat.([:a, :b], [:c,:d])
-
+ans = list_concat.([:a, :b], [:c,:d])
+IO.inspect ans # IO.puts はlistに使えない
 
 sum = fn (a , b , c) -> a+b+c end
-sum.(1,2,3)
+s = sum.(1,2,3)
+IO.puts s
 
 
+pair_tuple_to_list = fn ( { tup , le } ) -> [tup, le]  end
+IO.inspect pair_tuple_to_list.({1234, 5678})
