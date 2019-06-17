@@ -48,7 +48,7 @@ end
 list = Enum.to_list(23..155)
 
 "****each****" |> IO.puts()
-Enum.each(["one", "two", "three"], fn(s) -> IO.puts(s) end)
+MyEnum.each(["one", "two", "three"], fn(s) -> IO.puts(s) end)
 
 "****all?****" |> IO.puts()
 MyEnum.all?(list , &(&1 > 20))  |> IO.inspect()
