@@ -12,5 +12,5 @@ end
 
 # true expected
 MyString.isASCII?('ABCEDf adbd{}`P`{\'}  ~~~') |> IO.inspect()
-# false expected
+# false expectedStringsAndBinaries01.ex
 MyString.isASCII?('あいうえお') |> IO.inspect()
