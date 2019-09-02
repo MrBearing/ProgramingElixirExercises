@@ -1,0 +1,3 @@
+[submodule "lib/ch13/ElixirGithubIssues"]
+	path = lib/ch13/ElixirGithubIssues
+	url = git@github.com:MrBearing/ElixirGithubIssues.git
