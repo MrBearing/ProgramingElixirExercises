@@ -1,3 +1,6 @@
 [submodule "lib/ch13/ElixirGithubIssues"]
 	path = lib/ch13/ElixirGithubIssues
 	url = git@github.com:MrBearing/ElixirGithubIssues.git
+[submodule "lib/ch13/weather_xml"]
+	path = lib/ch13/weather_xml
+	url = https://github.com/MrBearing/weather_xml
