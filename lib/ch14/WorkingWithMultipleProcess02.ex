@@ -1,26 +1,17 @@
-defmodule Chain do
-  def process(pid) do
-    receive do
-      {sender, msg} ->
-        send sender, msg
-    end
-
+defmodule Names do
+  def process(name , pid) do
+    send pid, name
   end
 
-  def create_processes(names) do
-    last = Enum.reduce name , self(),
-            fn (_,send_to) ->
-              spawn(Chain, :counter, [send_to])
-            end
-    send last, 0
-    receive do
-      final_answer when is_integer(final_answer) ->
-        "Result is #{inspect(final_answer)}"
-    end
+  def create_processes() do
+    spawn(Names, :process, ["fred",self()])
+    spawn(Names, :process, ["betty",self()])
+    receive do name -> IO.puts(name) end
+    receive do name -> IO.puts(name) end
   end
 
-  def run(names) do
-
+  def run() do
+    create_processes()
   end
 end
 
