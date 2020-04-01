@@ -19,9 +19,8 @@ defmodule WordCounter do
   def count_word(scheduler) do
     send scheduler, {:ready, self()}
     receive do
-      {:find_cat,file_name,,client} ->
+      {:count_word, n, file_name, search_string,client} ->
         send client,{:answer , n ,count(n), self()}
-
         count_word( scheduler)
       {:shutdown} ->
         exit(:nomal)
@@ -30,7 +29,8 @@ defmodule WordCounter do
 
   def
 
-  def count_word(file_str, search_string) do
+  def count_(file_path, search_string) do
+    file_str = File.read!(file_path)
     r = Regex.compile!(search_string)
     Regex.scan(r ,file_str) |> length
   end
@@ -39,7 +39,7 @@ end
 
 defmodule Scheduler do
 
-  def run(num_process, module, func ,  ) do
+  def run(num_process, module, func , files) do
     (1..num_process)
     |> Enum.map(fn(_) -> spawn(module, func, [self()]) end)
     |> schedule_processes(to_calculate, [])
@@ -64,12 +64,13 @@ defmodule Scheduler do
   end
 end
 
-to_process = [37, 37, 37, 37, 37, 37 ]
-
+dir = "./files/"
+file_path_list = File.ls!(dir) |> Enum.map(fn file_name -> dir <> file_name end )
+IO.inspect(file_path_list)
 Enum.each 1..16, fn num_processes ->
   {time, result} = :timer.tc(
     Scheduler, :run,
-    [num_processes, WordCounter, :count_word , to_process]
+    [num_processes, WordCounter, :count_word , file_path_list]
   )
   if num_processes == 1 do
     IO.puts inspect result
